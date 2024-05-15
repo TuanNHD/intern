@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset="UTF-8">
+<title>Car</title>
+</head>
+<style>
+.tb-style {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.tb-style td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.button-style {
+  width: 100%;
+  margin: 2px 0 2px 0;
+}
+
+</style>
+<body>
+<table class="tb-style">
+    <tr>
+        <th>ID</th>
+        <th>Car name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="car: ${cars}">
+        <td th:text="${car.id}" />
+        <td th:text="${car.name}" />
+        <td th:text="${car.description}" />
+        <td th:text="${car.price}" />
+        <td>
+            <a th:href="@{/car/update/{id}(id=${car.id})}"><button class="button-style">Update</button></a>
+            <form th:action="@{/car/remove/{id}(id=${car.id})}" method="post">
+                <input type="submit" value="Remove"  class="button-style"/>
+            </form>
+        </td>
+</tr>
+</table>
+<div style="text-align: center; margin-top: 10px">
+    <a href="/car/add"><button>Add new car</button></a>
+</div>
+</body>
+</html>
