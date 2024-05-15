@@ -1,0 +1,30 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window title="Car List" border="normal" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.carproject.zk.viewmodel.CarViewModel')">
+        <vlayout>
+            <listbox model="@load(vm.cars)" emptyMessage="No cars available">
+                <listhead>
+                    <listheader label="Model"/>
+                    <listheader label="Make"/>
+                    <listheader label="Preview"/>
+                    <listheader label="Price"/>
+                    <listheader label="Actions"/>
+                </listhead>
+                <template name="model" var="car">
+                    <listitem>
+                        <listcell label="@load(car.model)"/>
+                        <listcell label="@load(car.make)"/>
+                        <listcell>
+                            <image src="@load(car.preview)"/>
+                        </listcell>
+                        <listcell label="@load(car.price)"/>
+                        <listcell>
+                            <button label="Edit" onClick="@command('edit', carId=car.id)"/>
+                            <button label="Delete" onClick="@command('delete', carId=car.id)"/>
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+            <button label="Add New Car" onClick="@command('addNew')"/>
+        </vlayout>
+    </window>
+</zk>

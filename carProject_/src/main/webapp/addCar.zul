@@ -1,0 +1,31 @@
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window title="Add New Car" border="normal" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.carproject.zk.viewmodel.CarViewModel')">
+        <vlayout>
+            <grid>
+                <rows>
+                    <row>
+                        <label value="Model"/>
+                        <textbox value="@bind(vm.newCar.model)"/>
+                    </row>
+                    <row>
+                        <label value="Make"/>
+                        <textbox value="@bind(vm.newCar.make)"/>
+                    </row>
+                    <row>
+                        <label value="Preview URL"/>
+                        <textbox value="@bind(vm.newCar.preview)"/>
+                    </row>
+                    <row>
+                        <label value="Price"/>
+                        <intbox value="@bind(vm.newCar.price)"/>
+                    </row>
+                    <row>
+                        <label value="Description"/>
+                        <textbox value="@bind(vm.newCar.description)" hflex="1" multiline="true"/>
+                    </row>
+                </rows>
+            </grid>
+            <button label="Submit" onClick="@command('submit')"/>
+        </vlayout>
+    </window>
+</zk>
