@@ -1,0 +1,20 @@
+
+	<window title="Create New Car" border="normal"
+		onOK="@command('addNewCar')"
+		viewModel="@id('vm') @init('com.example.demo.viewModel.SearchViewModel')"
+		style="margin:auto">
+		<vlayout>
+			Model:
+			<textbox value="@init(vm.editCar.model)" />
+			Make:
+			<textbox value="@init(vm.editCar.make)" />
+			Price:
+			<intbox value="@init(vm.editCar.price)" />
+			Description:
+			<textbox multiline="true" rows="5" cols="30"
+				value="@init(vm.editCar.description)" />
+			<button label="add" iconSclass="z-icon-a"
+				onClick="@command('addNewCar')" style="margin: 0 0 54px 5px" />
+
+		</vlayout>
+	</window>

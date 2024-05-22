@@ -1,0 +1,28 @@
+
+<zk>
+	<window title="Login" width="50%" border="normal"
+		onOK="@command('login')"
+		viewModel="@id('vm') @init('tutorial.LoginViewModel')"
+		style="margin:auto">
+		<vlayout>
+			<grid>
+				<rows>
+					<row>
+						<label value="Username:" />
+						<textbox value="@save(vm.username)" />
+					</row>
+					<row>
+						<label value="Password:" />
+						<textbox type="password" value="@save(vm.password)" />
+					</row>
+					<row>
+						<label value="username : user , password : 123" />
+					</row>
+					<row>
+						<button label="Login" onClick="@command('login')" />
+					</row>
+				</rows>
+			</grid>
+		</vlayout>
+	</window>
+</zk>

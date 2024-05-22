@@ -1,0 +1,25 @@
+
+<window title="Create New Car" border="normal"
+	onOK="@command('addNewCar')"
+	viewModel="@id('vm') @init('com.example.demo.viewModel.SearchViewModel')"
+	style="margin:auto">
+	<vlayout>
+		Model:
+		<textbox value="@save(vm.createCar.model)" constraint="no empty:please enter model"/>
+		Make:
+		<textbox value="@save(vm.createCar.make)" constraint="no empty:please enter make"/>
+		Price:
+		<intbox value="@save(vm.createCar.price)" constraint="no empty:please enter price" />
+		Description:
+		<textbox multiline="true" rows="5" cols="30"
+			value="@save(vm.createCar.description)" />
+		Image:
+		<button label="Upload Image" onClick="@command('uploadImage')" />
+		<button label="show image" onClick="@command('showImg')" />
+		<image visible="@bind(vm.isOpenImg)" src="@bind(vm.createCar.preview)" width="200px"
+			height="auto" />
+		<button label="Add" iconSclass="z-icon-a"
+			onClick="@command('addNewCar')" style="margin: 0 0 54px 5px" />
+
+	</vlayout>
+</window>
