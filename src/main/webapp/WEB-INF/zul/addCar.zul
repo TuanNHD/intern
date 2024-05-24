@@ -2,14 +2,18 @@
 <window title="Create New Car" border="normal"
 	onOK="@command('addNewCar')"
 	viewModel="@id('vm') @init('com.example.demo.viewModel.SearchViewModel')"
-	style="margin:auto">
+	style="margin:auto" validationMessages="@id('vmsgs')" >
 	<vlayout>
 		Model:
-		<textbox value="@save(vm.createCar.model)" constraint="no empty:please enter model"/>
+		<textbox value="@save(vm.createCar.model,before='addNewCar')"
+		 constraint="no empty:please enter model"/>
 		Make:
-		<textbox value="@save(vm.createCar.make)" constraint="no empty:please enter make"/>
+		<textbox value="@save(vm.createCar.make,before='addNewCar') @validator(vm.makeValidator)"
+		 				/>
+		 <label value="@load(vmsgs['fr'])" style ="color:red;"/>
 		Price:
-		<intbox value="@save(vm.createCar.price)" constraint="no empty:please enter price" />
+		<intbox value="@save(vm.createCar.price,before='addNewCar')"
+				 		constraint="no empty:please enter price" />
 		Description:
 		<textbox multiline="true" rows="5" cols="30"
 			value="@save(vm.createCar.description)" />

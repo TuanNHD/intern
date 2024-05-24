@@ -6,26 +6,28 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+import javax.validation.Validator;
+
 import org.apache.catalina.Store;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.annotation.Command;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Window;
 
 import com.example.demo.CarService.CarService;
 import com.example.demo.CarService.CarServiceImpl;
 import com.example.demo.Repository.CarRepository;
 import com.example.demo.entity.Car;
+import com.example.demo.validator.MakeValidator;
 
 /**
  * Suggest using ZK {@link org.zkoss.zul.ListModel} implementation as a
@@ -46,11 +48,16 @@ public class SearchViewModel{
 @WireVariable
 CarRepository carRepository;
 CarService carService;
+AbstractValidator makeValidator;
+public AbstractValidator getMakeValidator() {
+	return  new MakeValidator();
+}
 @Init
 public void init() {
 	carService= new CarServiceImpl();
 	carRepository.saveAll(carService.listAddCar());
 	carList.addAll(carRepository.findAll());
+	
 }
 	public boolean getIsOpenPopup() {
 		return isOpenPopup;
