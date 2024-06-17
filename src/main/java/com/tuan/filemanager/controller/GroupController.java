@@ -51,7 +51,7 @@ public class GroupController {
     }
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("data") MultipartFile file, @RequestParam("folderId") Long id) {
+    public String upload(@RequestParam("data") MultipartFile file, @RequestParam(name = "folderId",defaultValue ="0" ) Long id) {
         if(file==null) {
             return "redirect:/control";
         }
@@ -68,7 +68,7 @@ public class GroupController {
             throw new RuntimeException(e);
         }
         fileService.saveFile(fileEntity);
-        return "redirect:/home";
+        return "redirect:/control";
     }
 
     @PostMapping("/cmd")
@@ -104,8 +104,13 @@ public class GroupController {
         return "viewFolder";
     }
     @GetMapping("/delete/{id}")
-    public String deleteFile(@PathVariable("id") Long id) throws CustomException {
+    public String deleteFolder(@PathVariable("id") Long id) throws CustomException {
         folderService.deleteFolder(id);
+        return "redirect:/control";
+    } @GetMapping("/deleteFile/{id}")
+    public String deleteFile(@PathVariable("id") Long id) throws CustomException {
+        FileEntity fileEntity = fileService.getFile(id);
+        fileService.deleteFile(fileEntity);
         return "redirect:/control";
     }
 }

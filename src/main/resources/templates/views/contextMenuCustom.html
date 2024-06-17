@@ -137,6 +137,10 @@
         window.location.href = "/control/" + thisElement.lastElementChild.firstElementChild.value
             + "?folderId=" + thisElement.lastElementChild.lastElementChild.value;
     }
+    let ab ;
+    function openFile(thisElement) {
+        window.location.href = "/home/" + thisElement.parentElement.firstElementChild.value;
+    }
 
     function rightClickGrid(thisElement) {
         locationValue = thisElement.firstElementChild.value;

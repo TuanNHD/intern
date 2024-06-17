@@ -50,7 +50,8 @@
                                     <input type="hidden" th:value="${folder.folderName}"/>
                                     <div class="folder-icon" style="font-size: 24px;
                                                 padding: 10px;
-                                                cursor: pointer;">📂</div>
+                                                cursor: pointer;">📂
+                                    </div>
                                     <div>
                                         <input type="text" style="border: none" th:value="${folder.folderName}"
                                                disabled/>
@@ -113,51 +114,21 @@
                         <div class="fw-bold col-3"></div>
                     </div>
                     <div th:each="file : ${files}" class="row file my-4">
-                        <div th:text="${file.fileName}" class="col-3"></div>
+                        <input th:value="${file.id}"  type="hidden"/>
+                        <div th:text="${file.fileName}" class="col-3" style="cursor: pointer;"
+                             ondblclick="openFile(this)">
+                        </div>
                         <div th:if="${file.fileName.endsWith('.txt')}" class="col-3"> 📑</div>
                         <div th:if="${file.fileName.endsWith('.xlsx')}" class="col-3"> 📓</div>
                         <div th:unless="${file.fileName.endsWith('.xlsx')}" class="col-3">📚</div>
                         <div th:text="${file.uploadDate}" class="col-3"></div>
                         <div class="col-3">
-                            <button class="mx-1 btn btn-primary btn-download">
-                                <i class="fa fa-download"></i>
-                            </button>
                             <button class="mx-1 btn btn-warning btn-save">
                                 <a th:href="@{/home/{id}(id=${file.id})}"><i class="fa-solid fa-eye"></i></a>
                             </button>
                             <button class="mx-1 btn btn-danger btn-delete">
-                                <i class="fa fa-trash"></i>
+                                <a th:href="@{/control/deleteFile/{id}(id=${file.id})}"><i class="fa fa-trash"></i></a>
                             </button>
-                            <button class="mx-1 btn btn-success btn-share" onclick="openShareModal()">
-                                <i class="fa fa-share"></i>
-                            </button>
-                            <div id="shareModel" class="modal-overlay" style="display: none">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Share File</h1>
-                                            <button type="button" onclick="closeShareModal()" class="btn-close"
-                                                    data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body my-3">
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">User's email</span>
-                                                <input type="text" aria-label="First name" class="form-control">
-                                            </div>
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" onclick="closeShareModal()"
-                                                    class="btn btn-secondary me-2"
-                                                    data-bs-dismiss="modal">Close
-                                            </button>
-                                            <button type="button" class="btn btn-primary">Share</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

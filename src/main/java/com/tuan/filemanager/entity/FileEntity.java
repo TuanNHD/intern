@@ -17,6 +17,7 @@ public class FileEntity {
 
     private LocalDateTime uploadDate = LocalDateTime.now();
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     FolderEntity folderEntity;
