@@ -2,12 +2,13 @@
 <html lang="en">
 <div class="row">
     <h5 class="text-danger" th:text="${error}"></h5>
-    <form action="/control/cmd" method="post">
+    <form action="/control/cmd" method="post" >
                             <textarea cols="100" rows="5" name="cmd"
                                       style="background: black;color:aliceblue;margin-left: 140px;"></textarea>
     </form>
 </div>
 <script>
+    window.onload= closeCml;
     function openModal() {
         var modal = document.getElementById("myModal");
         modal.style.display = "flex";
@@ -47,5 +48,10 @@
             }
         }
     })
+    function closeCml() {
+        commandLine.style.display = "none";
+    }function openCml() {
+        commandLine.style.display = "block";
+    }
 </script>
 </html>

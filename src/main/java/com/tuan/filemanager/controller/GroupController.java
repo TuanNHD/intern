@@ -101,8 +101,8 @@ public class GroupController {
         return "viewFolder";
     }
     @GetMapping("/delete/{id}")
-    public String deleteFile(@PathVariable("id") Long id) {
-        folderService.deleteFolder(folderService.getFolderById(id));
+    public String deleteFile(@PathVariable("id") Long id) throws CustomException {
+        folderService.deleteFolder(id);
         return "redirect:/control";
     }
 }

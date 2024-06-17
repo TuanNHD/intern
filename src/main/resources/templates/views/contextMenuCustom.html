@@ -7,6 +7,7 @@
         <li class="list-group-item" value="2">Rename</li>
         <li class="list-group-item " value="3">UploadFile</li>
         <li class="list-group-item " value="4">Delete</li>
+        <li class="list-group-item " value="5">CommandLine</li>
     </ul>
 </div>
 <div id="popupNewFolder"
@@ -80,6 +81,7 @@
         if (evt.keyCode === 27) {
             popup.style.display = "none";
             popupNewFolder.style.display = "none";
+            closeCml();
         }
     })
     listItems.forEach(function (item) {
@@ -116,6 +118,9 @@
             case 4:
                 window.location.href = "/control/delete/" + idFolderRightClick;
                 break;
+            case 5:
+                openCml();
+                break;
             default:
                 break;
         }
@@ -127,10 +132,11 @@
         thisElementFolderName = thisElement.lastElementChild.firstElementChild.value;
         idFolderRightClickShowHide = idFolderRightClick;
     }
-   function openFolder(thisElement) {
-       window.location.href = "/control/"+thisElement.lastElementChild.firstElementChild.value
-            +"?folderId=" + thisElement.lastElementChild.lastElementChild.value;
-   }
+
+    function openFolder(thisElement) {
+        window.location.href = "/control/" + thisElement.lastElementChild.firstElementChild.value
+            + "?folderId=" + thisElement.lastElementChild.lastElementChild.value;
+    }
 
     function rightClickGrid(thisElement) {
         locationValue = thisElement.firstElementChild.value;
@@ -155,13 +161,11 @@
         popupNewFolder.style.top = (event.pageY + 10) + "px";
         newFolderName.value = "";
         newFolderName.focus();
-        if (idFolderRightClick != null&&folderNameParentHidden.value==null) {
+        if (idFolderRightClick != null && folderNameParentHidden.value == "") {
             folderIdInput.value = idFolderRightClick;
-        }
-        else if (idFolderRightClick == null&&folderNameParentHidden.value!=null) {
+        } else if (idFolderRightClick == null && folderNameParentHidden.value != "") {
             folderIdInput.value = folderIdParentHidden.value;
-        }
-        else {
+        } else {
             folderIdInput.value = idFolderRightClick = "";
             newFolderName.value = nameFolderRightClick = "";
         }

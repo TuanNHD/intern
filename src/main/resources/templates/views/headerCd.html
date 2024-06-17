@@ -27,6 +27,15 @@
         var modal = document.getElementById("myModal");
         modal.style.display = "none";
     }
+
+    function closeCml() {
+        commandLine.style.display = "none";
+    }
+
+    function openCml() {
+        commandLine.style.display = "block";
+    }
+
     let commandLine = document.getElementsByTagName("textarea")[0];
     let formSb = document.getElementsByTagName("form")[0];
     commandLine.focus();
@@ -47,5 +56,6 @@
             }
         }
     })
+window.onload= closeCml;
 </script>
 </html>

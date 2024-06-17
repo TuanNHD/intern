@@ -48,7 +48,9 @@
                                      ondblclick="openFolder(this)"
                                      oncontextmenu="rightClick(this)">
                                     <input type="hidden" th:value="${folder.folderName}"/>
-                                    <div class="folder-icon">📂</div>
+                                    <div class="folder-icon" style="font-size: 24px;
+                                                padding: 10px;
+                                                cursor: pointer;">📂</div>
                                     <div>
                                         <input type="text" style="border: none" th:value="${folder.folderName}"
                                                disabled/>

@@ -17,8 +17,8 @@ public class FolderService {
          folderRepository.save(folderEntity);
     }
 
-    public void deleteFolder(FolderEntity folderEntity) {
-        folderRepository.delete(folderEntity);
+    public void deleteFolder(Long folderId) {
+        folderRepository.deleteByFolderId(folderId);
     }
     public void updateFolder(FolderEntity folderEntity) {
         folderRepository.save(folderEntity);
