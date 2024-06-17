@@ -123,12 +123,12 @@
                         <div th:unless="${file.fileName.endsWith('.xlsx')}" class="col-3">📚</div>
                         <div th:text="${file.uploadDate}" class="col-3"></div>
                         <div class="col-3">
-                            <button class="mx-1 btn btn-warning btn-save">
-                                <a th:href="@{/home/{id}(id=${file.id})}"><i class="fa-solid fa-eye"></i></a>
-                            </button>
-                            <button class="mx-1 btn btn-danger btn-delete">
-                                <a th:href="@{/control/deleteFile/{id}(id=${file.id})}"><i class="fa fa-trash"></i></a>
-                            </button>
+                            <a th:href="@{/home/{id}(id=${file.id})}"><button class="mx-1 btn btn-warning btn-save">
+                                <i class="fa-solid fa-eye"></i>
+                            </button></a>
+                            <a th:href="@{/control/deleteFile/{id}(id=${file.id})}"><button class="mx-1 btn btn-danger btn-delete">
+                                <i class="fa fa-trash"></i>
+                            </button></a>
                         </div>
                     </div>
                 </div>

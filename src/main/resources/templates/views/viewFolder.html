@@ -17,7 +17,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 
-<body>>
+<body>
 <div class="overlay"></div>
 <div class="container">
     <div class="card" style="box-sizing: border-box;height: 1300px;width: 1300px">
@@ -98,53 +98,54 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="user col-6" style="text-align: right">
-                <div id="myModal" class="modal-overlay" style="display: none">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form th:action="@{/control/upload}" method="post" enctype="multipart/form-data"
-                                  th:object="${file}">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="1exampleModalLabel">Upload</h1>
-                                    <button type="button" onclick="closeModal()" class="btn-close"
-                                            data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body my-3">
-                                    <!--                                        <div th:if="${folders.size() != 0}">-->
-                                    <div class="input-group mb-3" th:if="${folders.size() != 0}">
+                <div class="row">
+                    <div class="user col-6" style="text-align: right">
+                        <div id="myModal" class="modal-overlay" style="display: none">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form th:action="@{/control/upload}" method="post" enctype="multipart/form-data"
+                                          th:object="${file}">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="1exampleModalLabel">Upload</h1>
+                                            <button type="button" onclick="closeModal()" class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body my-3">
+                                            <!--                                        <div th:if="${folders.size() != 0}">-->
+                                            <div class="input-group mb-3" th:if="${folders.size() != 0}">
                                     <span class="input-group-text"
                                           style="background-color: cadetblue">folder name</span>
-                                        <select class="form-select" name="folderName">
-                                            <option selected>--please choose a option--</option>
-                                            <option th:each="folder : ${folders}" th:value="${folder.folderName}"
-                                                    th:text="${folder.folderName}"></option>
-                                        </select>
-                                    </div>
-                                    <!--                                        </div>-->
-                                    <div class="input-group mb-3">
-                                        <input style="background-color: cadetblue" type="file" th:field="*{data}"
-                                               class="form-control"
-                                               id="inputGroupFile02">
+                                                <select class="form-select" name="folderName">
+                                                    <option selected>--please choose a option--</option>
+                                                    <option th:each="folder : ${folders}" th:value="${folder.folderName}"
+                                                            th:text="${folder.folderName}"></option>
+                                                </select>
+                                            </div>
+                                            <!--                                        </div>-->
+                                            <div class="input-group mb-3">
+                                                <input style="background-color: cadetblue" type="file" th:field="*{data}"
+                                                       class="form-control"
+                                                       id="inputGroupFile02">
 
-                                    </div>
+                                            </div>
 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" onclick="closeModal()" class="btn btn-secondary me-2"
+                                                    data-bs-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" onclick="closeModal()" class="btn btn-secondary me-2"
-                                            data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Upload</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <div th:include="contextMenuCustom"></div>
@@ -158,8 +159,10 @@
         crossorigin="anonymous"></script>
 
 <script>
+    let az;
     function openModal() {
         var modal = document.getElementById("myModal");
+        az = modal;
         modal.style.display = "flex";
     }
 
@@ -173,8 +176,8 @@
         modal.style.display = "none";
     }
 
-    function closeModal() {
         var modal = document.getElementById("myModal");
+    function closeModal() {
         modal.style.display = "none";
     }
     commandLine.addEventListener("keypress", function (event) {
