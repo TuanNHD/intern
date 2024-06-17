@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>File Viewer</title>
+</head>
+<body>
+<h1>File Viewer</h1>
+<iframe th:src="@{|/home/${file.id}/content|}" style="width: 100%; height: 600px;"></iframe>
+</body>
+</html>

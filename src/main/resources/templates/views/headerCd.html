@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="row">
+    <form action="/control/cmdCd" method="post">
+                            <textarea cols="100" rows="5" name="cmd"
+                                      style="background: black;color:aliceblue;margin-left: 140px;"></textarea>
+        <input name="folderParentId" type="hidden" th:value="${folder.id}"/>
+    </form>
+</div>
+<script>
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "flex";
+    }
+
+    function openShareModal() {
+        var modal = document.getElementById("shareModel");
+        modal.style.display = "flex";
+    }
+
+    function closeShareModal() {
+        var modal = document.getElementById("shareModel");
+        modal.style.display = "none";
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+    let commandLine = document.getElementsByTagName("textarea")[0];
+    let formSb = document.getElementsByTagName("form")[0];
+    commandLine.focus();
+    commandLine.addEventListener("keypress", function (event) {
+        if (event.key === 'Enter') {
+            if (commandLine.value.toLowerCase() === "back") {
+                history.back();
+            }
+            if (commandLine.value.toLowerCase() === "home") {
+                commandLine.value += " gohome";
+                event.preventDefault();
+                event.stopPropagation();
+                formSb.submit();
+            } else {
+                event.preventDefault();
+                event.stopPropagation();
+                formSb.submit();
+            }
+        }
+    })
+</script>
+</html>

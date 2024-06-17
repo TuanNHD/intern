@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<div id="popup" style="display: none; position: absolute; background-color: white; border: none; padding: 10px;">
+    <ul class="list-group">
+        <li class="list-group-item " value="0">New Folder</li>
+        <li class="list-group-item " value="1">Refresh</li>
+        <li class="list-group-item" value="2">Rename</li>
+        <li class="list-group-item " value="3">UploadFile</li>
+        <li class="list-group-item " value="4">Delete</li>
+    </ul>
+</div>
+<div id="popupNewFolder"
+     style="display: none; position: absolute; background-color: white; border: none; padding: 10px;">
+    <input type="text" id="newFolderName" value="" class="form-control"/>
+</div>
+<form id="formCmd" th:action="@{/control/cmdCd}" method="post"
+      style="display: none">
+    <input id="cmdInput" name="cmd"/>
+    <input id="folderIdInput" name="folderParentId"/>
+</form>
+<script>
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "flex";
+    }
+
+    function openShareModal() {
+        var modal = document.getElementById("shareModel");
+        modal.style.display = "flex";
+    }
+
+    function closeShareModal() {
+        var modal = document.getElementById("shareModel");
+        modal.style.display = "none";
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    let card = document.getElementsByClassName("card")[0];
+    let newFolderName = document.getElementById("newFolderName");
+    let idFolderRightClick;
+    let nameFolderRightClick;
+    let formCmd = document.getElementById("formCmd");
+    let cmdInput = document.getElementById("cmdInput");
+    let folderIdInput = document.getElementById("folderIdInput");
+    var popup = document.getElementById("popup");
+    var listItems = document.querySelectorAll("#popup li");
+    var popupNewFolder = document.getElementById("popupNewFolder");
+    let thisElementFolderName;
+    let idFolderRightClickShowHide;
+    let folderNameParentHidden = document.getElementById("folderNameParentHidden");
+    let folderIdParentHidden = document.getElementById("folderIdParentHidden");
+    card.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+        if (event.button === 2) {
+            popup.style.display = "block";
+            popup.style.left = (event.pageX + 10) + "px";
+            popup.style.top = (event.pageY + 10) + "px";
+        }
+        if (idFolderRightClickShowHide == null) {
+            listItems[2].style.display = "none";
+            listItems[4].style.display = "none";
+        } else {
+            listItems[2].style.display = "block";
+            listItems[4].style.display = "block";
+        }
+        idFolderRightClickShowHide = undefined;
+
+    })
+
+    // Thêm sự kiện cho mỗi phần tử <li>
+    document.addEventListener("click", function (evt) {
+        popup.style.display = "none";
+        popupNewFolder.style.display = "none";
+    })
+    document.addEventListener("keydown", function (evt) {
+        if (evt.keyCode === 27) {
+            popup.style.display = "none";
+            popupNewFolder.style.display = "none";
+        }
+    })
+    listItems.forEach(function (item) {
+        item.addEventListener("mouseover", function () {
+            item.classList.add("active");
+        });
+        item.addEventListener("mouseout", function () {
+            item.classList.remove("active");
+        });
+        item.addEventListener("click", function (event) {
+            clickItem(event, item);
+        })
+    });
+
+    function clickItem(event, item) {
+        switch (item.value) {
+            case 0:
+                event.stopPropagation();
+                event.preventDefault();
+                newFolder(event);
+                break;
+            case 1:
+                window.location.reload();
+                break;
+            case 2:
+                event.stopPropagation();
+                event.preventDefault();
+                rename(event);
+                idFolderRightClickShowHide = undefined;
+                break;
+            case 3:
+                openModal();
+                break;
+            case 4:
+                window.location.href = "/control/delete/" + idFolderRightClick;
+                break;
+            default:
+                break;
+        }
+    }
+
+    function rightClick(thisElement) {
+        idFolderRightClick = thisElement.lastElementChild.lastElementChild.value;
+        nameFolderRightClick = thisElement.firstElementChild.value;
+        thisElementFolderName = thisElement.lastElementChild.firstElementChild.value;
+        idFolderRightClickShowHide = idFolderRightClick;
+    }
+   function openFolder(thisElement) {
+       window.location.href = "/control/"+thisElement.lastElementChild.firstElementChild.value
+            +"?folderId=" + thisElement.lastElementChild.lastElementChild.value;
+   }
+
+    function rightClickGrid(thisElement) {
+        locationValue = thisElement.firstElementChild.value;
+        if (thisElement.children[1] != null) {
+            idFolderRightClick = thisElement.lastElementChild.lastElementChild.value;
+            nameFolderRightClick = thisElement.children[1].value;
+            thisElementFolderName = thisElement.lastElementChild.firstElementChild;
+            idFolderRightClickShowHide = idFolderRightClick;
+        }
+    }
+
+    function submit(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        formCmd.submit();
+    }
+
+    function newFolder(event) {
+        popup.style.display = "none";
+        popupNewFolder.style.display = "block";
+        popupNewFolder.style.left = (event.pageX + 10) + "px";
+        popupNewFolder.style.top = (event.pageY + 10) + "px";
+        newFolderName.value = "";
+        newFolderName.focus();
+        if (idFolderRightClick != null&&folderNameParentHidden.value==null) {
+            folderIdInput.value = idFolderRightClick;
+        }
+        else if (idFolderRightClick == null&&folderNameParentHidden.value!=null) {
+            folderIdInput.value = folderIdParentHidden.value;
+        }
+        else {
+            folderIdInput.value = idFolderRightClick = "";
+            newFolderName.value = nameFolderRightClick = "";
+        }
+        newFolderName.addEventListener("keypress", function (event) {
+            if (event.key === 'Enter') {
+                event.stopPropagation();
+                event.preventDefault();
+                cmdInput.value = "mkdir " + newFolderName.value;
+                console.log(cmdInput.value);
+                submit(event);
+            }
+        })
+    }
+
+    function rename(event) {
+
+        popup.style.display = "none";
+        thisElementFolderName.disabled = false;
+        thisElementFolderName.focus();
+        if (idFolderRightClick != null) {
+            folderIdInput.value = idFolderRightClick;
+        } else {
+            folderIdInput.value = idFolderRightClick = "";
+        }
+        thisElementFolderName.addEventListener("keypress", function (event) {
+            if (event.key === 'Enter') {
+                event.stopPropagation();
+                event.preventDefault();
+                cmdInput.value = "rn " + folderIdInput.value + " " + thisElementFolderName.value;
+                console.log(cmdInput.value);
+                submit(event);
+            }
+        });
+    }
+</script>
+</html>
