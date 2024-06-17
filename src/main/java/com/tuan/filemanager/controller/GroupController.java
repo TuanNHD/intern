@@ -52,6 +52,9 @@ public class GroupController {
 
     @PostMapping("/upload")
     public String upload(@RequestParam("data") MultipartFile file, @RequestParam("folderId") Long id) {
+        if(file==null) {
+            return "redirect:/control";
+        }
         FileEntity fileEntity = new FileEntity();
         FolderEntity entity = folderService.getFolderById(id);
         if (entity != null) {

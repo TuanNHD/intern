@@ -39,23 +39,6 @@
     let commandLine = document.getElementsByTagName("textarea")[0];
     let formSb = document.getElementsByTagName("form")[0];
     commandLine.focus();
-    commandLine.addEventListener("keypress", function (event) {
-        if (event.key === 'Enter') {
-            if (commandLine.value.toLowerCase() === "back") {
-                history.back();
-            }
-            if (commandLine.value.toLowerCase() === "home") {
-                commandLine.value += " gohome";
-                event.preventDefault();
-                event.stopPropagation();
-                formSb.submit();
-            } else {
-                event.preventDefault();
-                event.stopPropagation();
-                formSb.submit();
-            }
-        }
-    })
 window.onload= closeCml;
 </script>
 </html>
