@@ -11,10 +11,10 @@ import org.zkoss.zk.ui.http.HttpSessionListener;
 
 @SpringBootApplication
 @Configuration
-public class Demo2Application {
+public class DemoCRUDZKApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Demo2Application.class, args);
+        SpringApplication.run(DemoCRUDZKApplication.class, args);
     }
 	@Bean
 	public ServletRegistrationBean zkLoader() {
